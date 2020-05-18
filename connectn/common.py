@@ -1,3 +1,4 @@
+#
 import numpy as np
 from typing import Optional
 PlayerAction = np.int8
@@ -38,15 +39,14 @@ def pretty_print_board(board: np.ndarray) -> str:
 
 
 def apply_player_action(board: np.ndarray, action: PlayerAction, player: BoardPiece, copy: bool = False) -> np.ndarray:
-    board_old = np.zeros((6,7))
     if copy == True:
-        board_old = np.copy(board)
+        board= board.copy()
     for counter,row in enumerate(board[:,action]):
         if row == 0:
             i = counter
             break
     board[i,action] = player
-    return board, board_old
+    return board
 
 
 def string_to_board(pp_board):
@@ -67,7 +67,57 @@ def string_to_board(pp_board):
     print(board)
     return board
 
-def connected_four(
-        board: np.ndarray, player: BoardPiece, last_action: Optional[PlayerAction] = None)-> bool:
-    pass
+
+def connected_four(board: np.ndarray, player: BoardPiece, last_action: Optional[PlayerAction] = None)-> bool:
+
+    for counter, row in enumerate(board):
+        if np.count_nonzero(row) == 0:
+            row_index = counter - 1
+            break
+    print(row_index)
+    check_position = np.zeros(2)
+    check_position[0] = row_index
+    check_position[1] = last_action
+
+    win_sum = 0
+
+    for i in board[int(check_position[0]),:]:
+        if i == player:
+            win_sum += 1
+        else:
+            win_sum = 0
+        if win_sum >= 4:
+            return True
+
+    win_sum = 0
+    for i in board[:, int(check_position[1])]:
+        if i == player:
+            win_sum += 1
+        else:
+            win_sum = 0
+        if win_sum >= 4:
+            return True
+    win_sum = 0
+    for i in np.diag(board, k = (int(check_position[1])-int(check_position[0]))):
+        if i == player:
+            win_sum += 1
+        else:
+            win_sum = 0
+        if win_sum >= 4:
+            return True
+    win_sum = 0
+    for i in np.diag(np.fliplr(board), k = (board.shape[1]-1-int(check_position[1]) - int(check_position[0]))):
+        if i == player:
+            win_sum += 1
+        else:
+            win_sum = 0
+        if win_sum >= 4:
+            return True
+
+    return False
+
+
+
+
+
 
