@@ -3,6 +3,7 @@ import numpy as np
 from typing import Optional
 PlayerAction = np.int8
 BoardPiece = np.int8
+NO_PlAYER = 0
 
 def initialize_game_state() -> np.ndarray:
     return np.zeros((6,7), dtype=BoardPiece)
@@ -41,16 +42,16 @@ def pretty_print_board(board: np.ndarray) -> str:
 def apply_player_action(board: np.ndarray, action: PlayerAction, player: BoardPiece, copy: bool = False) -> np.ndarray:
     if copy == True:
         board= board.copy()
-    for counter,row in enumerate(board[:,action]):
-        if row == 0:
-            i = counter
-            break
-    board[i,action] = player
+    try:
+        row_index = np.argwhere(board[:,action] == 0)[0]
+        board[row_index,action] = player
+    except IndexError:
+        return IndexError
     return board
 
 
 def string_to_board(pp_board):
-    board = np.zeros(6*7)
+    board = np.zeros((6,7), dtype=BoardPiece)
     pp_board = pp_board.split(" ")
     print(pp_board)
     for counter, item in enumerate(pp_board):
