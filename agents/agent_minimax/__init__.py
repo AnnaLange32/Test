@@ -1,0 +1,1 @@
+from .minimax import generate_smart_move as generate_move
