@@ -1,9 +1,8 @@
 from random import randrange, uniform
 
 import numpy as np
-from enum import Enum
 from typing import Optional
-from typing import Callable, Tuple
+from typing import Tuple
 
 from scipy.signal.sigtools import _convolve2d
 
