@@ -4,38 +4,6 @@ import pytest
 
 from agents.common import PlayerAction, BoardPiece, NO_PLAYER, PLAYER1, PLAYER2, CONNECT_N
 
-# def test_window_value():
-#     from agents.agent_minimax.minimax import window_value
-#
-#     window1 = np.array([0,0,0,0])
-#     window2 = np.array([2,2,2,0])
-#     window3 = np.array([1,1,1,0])
-#     window4 = np.array([1,1,1,1])
-#     window5 = np.array([1,0,1,0])
-#
-#     ret11 = window_value(window1, PLAYER1)
-#     ret12 = window_value(window1, PLAYER2)
-#
-#     ret21 = window_value(window2, PLAYER1)
-#     ret22 = window_value(window2, PLAYER2)
-#
-#     ret31 = window_value(window3, PLAYER1)
-#     ret32 = window_value(window3, PLAYER2)
-#
-#     ret41 = window_value(window4, PLAYER1)
-#     ret42 = window_value(window4, PLAYER2)
-#
-#     ret51 = window_value(window5, PLAYER1)
-#     ret52 = window_value(window5, PLAYER2)
-#
-#
-#     assert isinstance(ret11, int)
-#     assert ret11 == 0 and ret12 == 0
-#     assert ret21 == -55 and ret22 == 50
-#     assert ret31 == 50 and ret32 == -55
-#     assert ret41 == 200 and ret42 == -250
-#     assert ret51 == 10 and ret52 == -12
-
 
 def test_position_value():
     #from agents.agent_minimax.minimax import window_value

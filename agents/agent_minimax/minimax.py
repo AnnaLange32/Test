@@ -11,14 +11,6 @@ from agents.common import initialize_game_state, pretty_print_board, apply_playe
 
 
 
-
-col_kernel = np.ones((CONNECT_N, 1), dtype=BoardPiece)
-row_kernel = np.ones((1, CONNECT_N), dtype=BoardPiece)
-dia_l_kernel = np.diag(np.ones(CONNECT_N, dtype=BoardPiece))
-dia_r_kernel = np.array(np.diag(np.ones(CONNECT_N, dtype=BoardPiece))[::-1, :])
-
-
-
 def get_player_actions(board: np.ndarray) -> list:
 
     '''
@@ -159,7 +151,7 @@ def alphabeta(board: np.ndarray, alpha: np.int8, beta:np.int8, MaximisingPlayer:
     terminalboard = check_terminal(board)
 
     if depth == 0 or terminalboard == True:
-        return position_value(board,player)
+        return position_value(board,player) * (depth +1)
 
     if MaximisingPlayer:
         value = -999
